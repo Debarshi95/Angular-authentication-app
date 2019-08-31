@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { AuthService } from "src/app/auth.service";
 import { User } from "src/app/user";
 
 @Component({
@@ -7,12 +8,15 @@ import { User } from "src/app/user";
   styleUrls: ["./register.component.css"]
 })
 export class RegisterComponent implements OnInit {
-  public registrationForm = {};
-  constructor() {}
+  public registrationForm = new User("", "", "", "", "");
+  constructor(private authService: AuthService) {}
 
   ngOnInit() {}
 
   registerUser() {
     console.log(this.registrationForm);
+    this.authService
+      .registerUser(this.registrationForm)
+      .subscribe(res => console.log(res), err => console.log(err));
   }
 }

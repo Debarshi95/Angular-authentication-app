@@ -7,6 +7,26 @@
       <div class="card-body">
         <form class="form" (ngSubmit)="registerUser()">
           <div class="form-group">
+            <label>Firstname</label>
+            <input
+              type="text"
+              [(ngModel)]="registrationForm.firstname"
+              name="text"
+              class="form-control rounded-0"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label>Lastname</label>
+            <input
+              type="text"
+              [(ngModel)]="registrationForm.lastname"
+              name="text"
+              class="form-control rounded-0"
+              required
+            />
+          </div>
+          <div class="form-group">
             <label>Email</label>
             <input
               type="email"
@@ -22,6 +42,16 @@
               type="password"
               [(ngModel)]="registrationForm.password"
               name="pasword"
+              class="form-control rounded-0"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label>Confirm Password</label>
+            <input
+              type="password"
+              [(ngModel)]="registrationForm.cpassword"
+              name="password"
               class="form-control rounded-0"
               required
             />
