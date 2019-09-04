@@ -5,59 +5,77 @@
         <h3 class="mb-0">Register</h3>
       </div>
       <div class="card-body">
-        <form class="form" (ngSubmit)="registerUser()">
+        <form
+          class="form"
+          (ngSubmit)="registerUser()"
+          [formGroup]="registrationForm"
+        >
           <div class="form-group">
             <label>Firstname</label>
             <input
               type="text"
-              [(ngModel)]="registrationForm.firstname"
-              name="text"
+              formControlName="firstname"
+              name="firstname"
               class="form-control rounded-0"
-              required
+              [class.is-invalid]="errors.firstname"
             />
+            <span class="invalid-feedback" *ngIf="errors.firstname">{{
+              errors.firstname
+            }}</span>
           </div>
           <div class="form-group">
             <label>Lastname</label>
             <input
               type="text"
-              [(ngModel)]="registrationForm.lastname"
-              name="text"
+              formControlName="lastname"
+              name="lastname"
               class="form-control rounded-0"
-              required
+              [class.is-invalid]="errors.lastname"
             />
+            <span class="invalid-feedback" *ngIf="errors.lastname">{{
+              errors.lastname
+            }}</span>
           </div>
           <div class="form-group">
             <label>Email</label>
             <input
               type="email"
-              [(ngModel)]="registrationForm.email"
+              formControlName="email"
               name="email"
               class="form-control rounded-0"
-              required
+              [class.is-invalid]="errors.email"
             />
+
+            <span class="invalid-feedback" *ngIf="errors.email">{{
+              errors.email
+            }}</span>
           </div>
           <div class="form-group">
             <label>Password</label>
             <input
               type="password"
-              [(ngModel)]="registrationForm.password"
-              name="pasword"
+              formControlName="password"
+              name="password"
               class="form-control rounded-0"
-              required
+              [class.is-invalid]="
+                errors.email && registrationForm.get('email').errors
+              "
             />
+            <span class="invalid-feedback" [class.d-none]="errors.password">{{
+              errors.password
+            }}</span>
           </div>
           <div class="form-group">
             <label>Confirm Password</label>
             <input
               type="password"
-              [(ngModel)]="registrationForm.cpassword"
-              name="password"
+              formControlName="password_confirmation"
+              name="password_confirmation"
               class="form-control rounded-0"
-              required
             />
           </div>
           <div class="form-group">
-            <button class="btn btn-primary float-right">
+            <button [disabled]="loading" class="btn btn-primary float-right">
               Register
             </button>
           </div>

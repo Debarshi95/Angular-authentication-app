@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from "src/app/auth.service";
-import { User } from "src/app/user";
+import { FormBuilder } from "@angular/forms";
 
 @Component({
   selector: "app-register",
@@ -8,15 +8,26 @@ import { User } from "src/app/user";
   styleUrls: ["./register.component.css"]
 })
 export class RegisterComponent implements OnInit {
-  public registrationForm = new User("", "", "", "", "");
-  constructor(private authService: AuthService) {}
-
-  ngOnInit() {}
-
+  constructor(private authService: AuthService, private fb: FormBuilder) {}
+  public registrationForm = this.fb.group({
+    firstname: [""],
+    lastname: [""],
+    email: [""],
+    password: [""],
+    password_confirmation: [""]
+  });
+  ngOnInit() {
+    console.log(this);
+  }
+  errors = [];
   registerUser() {
     console.log(this.registrationForm);
-    this.authService
-      .registerUser(this.registrationForm)
-      .subscribe(res => console.log(res), err => console.log(err));
+    this.authService.registerUser(this.registrationForm.value).subscribe(
+      res => console.log(res),
+      err => {
+        this.errors = err.error.message;
+        console.log(this);
+      }
+    );
   }
 }
