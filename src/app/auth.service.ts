@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { Observable, pipe } from "rxjs";
 import { map } from "rxjs/operators";
 
 @Injectable({
@@ -12,7 +12,11 @@ export class AuthService {
 
   registerUser(user): Observable<any> {
     return this.http
-      .post<any>(`${this.url}/register`, user)
-      .pipe(map(res => res.message));
+      .post<any>(`${this.url}/register`, user);
+  }
+
+  loginUser(user):Observable<any>{
+    return this.http.post<any>(`${this.url}/login`,user)
+    .pipe(map(res=>res.message));
   }
 }

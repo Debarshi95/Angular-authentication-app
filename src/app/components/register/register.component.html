@@ -1,5 +1,8 @@
 <div class="row pt-5">
   <div class="col-md-6 mx-auto">
+    <div class="alert alert-danger" *ngIf="errors.message">
+      {{ errors.message }}
+    </div>
     <div class="card rounded-0">
       <div class="card-header">
         <h3 class="mb-0">Register</h3>
@@ -15,12 +18,12 @@
             <input
               type="text"
               formControlName="firstname"
-              name="firstname"
               class="form-control rounded-0"
-              [class.is-invalid]="errors.firstname"
+              [class.is-invalid]="errors.errors?.firstname"
+              (keyup)="errors.errors.firstname = false"
             />
-            <span class="invalid-feedback" *ngIf="errors.firstname">{{
-              errors.firstname
+            <span class="invalid-feedback" *ngIf="errors.errors?.firstname">{{
+              errors.errors?.firstname
             }}</span>
           </div>
           <div class="form-group">
@@ -28,12 +31,12 @@
             <input
               type="text"
               formControlName="lastname"
-              name="lastname"
               class="form-control rounded-0"
-              [class.is-invalid]="errors.lastname"
+              [class.is-invalid]="errors.errors?.lastname"
+              (keyup)="errors.errors.lastname = false"
             />
-            <span class="invalid-feedback" *ngIf="errors.lastname">{{
-              errors.lastname
+            <span class="invalid-feedback" *ngIf="errors.errors?.lastname">{{
+              errors.errors?.lastname
             }}</span>
           </div>
           <div class="form-group">
@@ -41,13 +44,13 @@
             <input
               type="email"
               formControlName="email"
-              name="email"
               class="form-control rounded-0"
-              [class.is-invalid]="errors.email"
+              [class.is-invalid]="errors.errors?.email"
+              (keyup)="errors.errors.email = false"
             />
 
-            <span class="invalid-feedback" *ngIf="errors.email">{{
-              errors.email
+            <span class="invalid-feedback" *ngIf="errors.errors?.email">{{
+              errors.errors?.email
             }}</span>
           </div>
           <div class="form-group">
@@ -55,14 +58,12 @@
             <input
               type="password"
               formControlName="password"
-              name="password"
               class="form-control rounded-0"
-              [class.is-invalid]="
-                errors.email && registrationForm.get('email').errors
-              "
+              [class.is-invalid]="errors.errors?.password"
+              (keyup)="errors.errors.password = false"
             />
-            <span class="invalid-feedback" [class.d-none]="errors.password">{{
-              errors.password
+            <span class="invalid-feedback" *ngIf="errors.errors?.password">{{
+              errors.errors?.password
             }}</span>
           </div>
           <div class="form-group">
@@ -70,12 +71,16 @@
             <input
               type="password"
               formControlName="password_confirmation"
-              name="password_confirmation"
               class="form-control rounded-0"
+              [class.is-invalid]="errors.errors?.password"
+              (keyup)="errors.password = false"
             />
+            <span class="invalid-feedback" *ngIf="errors.errors?.password">{{
+              errors.errors?.password
+            }}</span>
           </div>
           <div class="form-group">
-            <button [disabled]="loading" class="btn btn-primary float-right">
+            <button class="btn btn-primary float-right">
               Register
             </button>
           </div>

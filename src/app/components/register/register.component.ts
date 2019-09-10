@@ -22,12 +22,14 @@ export class RegisterComponent implements OnInit {
   errors = [];
   registerUser() {
     console.log(this.registrationForm);
-    this.authService.registerUser(this.registrationForm.value).subscribe(
-      res => console.log(res),
-      err => {
-        this.errors = err.error.message;
-        console.log(this);
-      }
-    );
+    if (this.registrationForm.valid) {
+      this.authService.registerUser(this.registrationForm.value).subscribe(
+        res => console.log(res),
+        err => {
+          this.errors = err.error;
+          console.log(this);
+        }
+      );
+    }
   }
 }
