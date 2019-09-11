@@ -11,4 +11,8 @@ export class EventsService {
   getEvents(): Observable<any> {
     return this.http.get<any>(`${this.url}/events`);
   }
+
+  getSpecialEvents(): Observable<any> {
+    return this.http.get<any>(`${this.url}/special`);
+  }
 }

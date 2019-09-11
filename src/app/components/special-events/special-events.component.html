@@ -1,1 +1,16 @@
-<p>special-events works!</p>
+<div class="row">
+  <div class="col-md-4 p-5" *ngFor="let specialEvent of specialEvents">
+    <div class="card text-center" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">{{ specialEvent.name }}</h5>
+        <p class="card-text">
+          {{ specialEvent.description }}
+        </p>
+        <a href="#" class="btn btn-success">Buy Tickets</a>
+      </div>
+      <div class="card-footer">
+        {{ specialEvent.created_at | date: "shortDate" }}
+      </div>
+    </div>
+  </div>
+</div>
