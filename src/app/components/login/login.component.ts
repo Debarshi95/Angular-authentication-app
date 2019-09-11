@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
     this.authService.loginUser(this.loginForm.value).subscribe(
       res => console.log(res),
       err => {
-        this.errors = err.error.message;
+        this.errors = err.error;
         console.log(this.errors);
       }
     );

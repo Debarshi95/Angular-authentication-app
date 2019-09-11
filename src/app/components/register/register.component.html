@@ -1,6 +1,6 @@
 <div class="row pt-5">
   <div class="col-md-6 mx-auto">
-    <div class="alert alert-danger" *ngIf="errors.message">
+    <div class="alert alert-danger text-center" *ngIf="errors.message">
       {{ errors.message }}
     </div>
     <div class="card rounded-0">
@@ -20,7 +20,7 @@
               formControlName="firstname"
               class="form-control rounded-0"
               [class.is-invalid]="errors.errors?.firstname"
-              (keyup)="errors.errors.firstname = false"
+              (keyup)="errors.errors.firstname = ''"
             />
             <span class="invalid-feedback" *ngIf="errors.errors?.firstname">{{
               errors.errors?.firstname
@@ -33,7 +33,7 @@
               formControlName="lastname"
               class="form-control rounded-0"
               [class.is-invalid]="errors.errors?.lastname"
-              (keyup)="errors.errors.lastname = false"
+              (keyup)="errors.errors.lastname = ''"
             />
             <span class="invalid-feedback" *ngIf="errors.errors?.lastname">{{
               errors.errors?.lastname
@@ -46,7 +46,7 @@
               formControlName="email"
               class="form-control rounded-0"
               [class.is-invalid]="errors.errors?.email"
-              (keyup)="errors.errors.email = false"
+              (keyup)="errors.errors.email = ''"
             />
 
             <span class="invalid-feedback" *ngIf="errors.errors?.email">{{
@@ -60,7 +60,7 @@
               formControlName="password"
               class="form-control rounded-0"
               [class.is-invalid]="errors.errors?.password"
-              (keyup)="errors.errors.password = false"
+              (keyup)="errors.errors.password = ''"
             />
             <span class="invalid-feedback" *ngIf="errors.errors?.password">{{
               errors.errors?.password
@@ -73,7 +73,7 @@
               formControlName="password_confirmation"
               class="form-control rounded-0"
               [class.is-invalid]="errors.errors?.password"
-              (keyup)="errors.password = false"
+              (keyup)="errors.password = ''"
             />
             <span class="invalid-feedback" *ngIf="errors.errors?.password">{{
               errors.errors?.password
