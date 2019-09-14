@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
+import { Router } from "@angular/router";
 
 @Injectable({
   providedIn: "root"
@@ -10,7 +11,7 @@ export class AuthService {
   httpOptions = new HttpHeaders({
     "X-Requested-With": "XMLHttpRequest"
   });
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   registerUser(user): Observable<any> {
     return this.http.post<any>(`${this.url}/register`, user, {
@@ -25,5 +26,12 @@ export class AuthService {
   }
   checkToken() {
     return !!localStorage.getItem("token");
+  }
+  getToken() {
+    return localStorage.getItem("token");
+  }
+  logout() {
+    localStorage.removeItem("token");
+    this.router.navigate(["/events"]);
   }
 }
