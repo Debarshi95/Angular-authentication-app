@@ -17,15 +17,22 @@ export class LoginComponent implements OnInit {
       password: [""]
     });
   }
-  errors = [];
 
   loginUser() {
     console.log(this);
     this.authService.loginUser(this.loginForm.value).subscribe(
       res => console.log(res),
       err => {
-        this.errors = err.error;
-        console.log(this.errors);
+        this.loginForm.setErrors({
+          error: err.error
+        });
+        this.loginForm
+          .get("email")
+          .setErrors({ errors: err.error.errors.email });
+        this.loginForm
+          .get("password")
+          .setErrors({ errors: err.error.errors.password });
+        console.log(this, err);
       }
     );
   }

@@ -43,7 +43,7 @@ export class RegisterComponent implements OnInit {
           error: err.error.errors.password
         });
         this.registrationForm.controls.password_confirmation.setErrors({
-          error: err.error.errors.password_confirmation
+          error: err.error.errors.password
         });
         console.log(this);
       }
