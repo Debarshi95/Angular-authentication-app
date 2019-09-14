@@ -1,8 +1,8 @@
 <div class="row pt-5">
   <div class="col-md-6 mx-auto">
-    <div class="alert alert-danger text-center" *ngIf="errors.message">
+    <!-- <div class="alert alert-danger text-center" *ngIf="errors.message">
       {{ errors.message }}
-    </div>
+    </div> -->
     <div class="card rounded-0">
       <div class="card-header">
         <h3 class="mb-0">Register</h3>
@@ -19,12 +19,13 @@
               type="text"
               formControlName="firstname"
               class="form-control rounded-0"
-              [class.is-invalid]="errors.errors?.firstname"
-              (keyup)="errors.errors.firstname = ''"
+              [class.is-invalid]="registrationForm.get('firstname').errors"
             />
-            <span class="invalid-feedback" *ngIf="errors.errors?.firstname">{{
-              errors.errors?.firstname
-            }}</span>
+            <span
+              class="invalid-feedback"
+              *ngIf="registrationForm.get('firstname').errors"
+              >{{ registrationForm.get("firstname").errors?.error }}</span
+            >
           </div>
           <div class="form-group">
             <label>Lastname</label>
@@ -32,12 +33,13 @@
               type="text"
               formControlName="lastname"
               class="form-control rounded-0"
-              [class.is-invalid]="errors.errors?.lastname"
-              (keyup)="errors.errors.lastname = ''"
+              [class.is-invalid]="registrationForm.get('lastname').errors"
             />
-            <span class="invalid-feedback" *ngIf="errors.errors?.lastname">{{
-              errors.errors?.lastname
-            }}</span>
+            <span
+              class="invalid-feedback"
+              *ngIf="registrationForm.get('lastname').errors"
+              >{{ registrationForm.get("lastname").errors?.error }}</span
+            >
           </div>
           <div class="form-group">
             <label>Email</label>
@@ -45,13 +47,13 @@
               type="email"
               formControlName="email"
               class="form-control rounded-0"
-              [class.is-invalid]="errors.errors?.email"
-              (keyup)="errors.errors.email = ''"
+              [class.is-invalid]="registrationForm.get('email').errors"
             />
-
-            <span class="invalid-feedback" *ngIf="errors.errors?.email">{{
-              errors.errors?.email
-            }}</span>
+            <span
+              class="invalid-feedback"
+              *ngIf="registrationForm.get('email').errors"
+              >{{ registrationForm.get("email").errors?.error }}</span
+            >
           </div>
           <div class="form-group">
             <label>Password</label>
@@ -59,12 +61,13 @@
               type="password"
               formControlName="password"
               class="form-control rounded-0"
-              [class.is-invalid]="errors.errors?.password"
-              (keyup)="errors.errors.password = ''"
+              [class.is-invalid]="registrationForm.get('password').errors"
             />
-            <span class="invalid-feedback" *ngIf="errors.errors?.password">{{
-              errors.errors?.password
-            }}</span>
+            <span
+              class="invalid-feedback"
+              *ngIf="registrationForm.get('password').errors"
+              >{{ registrationForm.get("password").errors?.error }}</span
+            >
           </div>
           <div class="form-group">
             <label>Confirm Password</label>
@@ -72,12 +75,15 @@
               type="password"
               formControlName="password_confirmation"
               class="form-control rounded-0"
-              [class.is-invalid]="errors.errors?.password"
-              (keyup)="errors.password = ''"
+              [class.is-invalid]="
+                registrationForm.get('password_confirmation').errors
+              "
             />
-            <span class="invalid-feedback" *ngIf="errors.errors?.password">{{
-              errors.errors?.password
-            }}</span>
+            <span
+              class="invalid-feedback"
+              *ngIf="registrationForm.get('password_confirmation').errors"
+              >{{ registrationForm.get("password").errors?.error }}</span
+            >
           </div>
           <div class="form-group">
             <button class="btn btn-primary float-right">

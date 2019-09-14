@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from "src/app/auth.service";
-import { FormBuilder } from "@angular/forms";
+import { FormBuilder, Validators } from "@angular/forms";
+import { HttpErrorResponse } from "@angular/common/http";
 
 @Component({
   selector: "app-register",
@@ -19,17 +20,33 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
     console.log(this);
   }
-  errors = [];
+
   registerUser() {
     console.log(this.registrationForm);
-    if (this.registrationForm.valid) {
-      this.authService.registerUser(this.registrationForm.value).subscribe(
-        res => console.log(res),
-        err => {
-          this.errors = err.error;
-          console.log(this);
-        }
-      );
-    }
+
+    this.authService.registerUser(this.registrationForm.value).subscribe(
+      res => {
+        console.log(res), localStorage.setItem("token", res.token);
+      },
+      err => {
+        console.log(err);
+        this.registrationForm.controls.firstname.setErrors({
+          error: err.error.errors.firstname
+        });
+        this.registrationForm.controls.lastname.setErrors({
+          error: err.error.errors.lastname
+        });
+        this.registrationForm.controls.email.setErrors({
+          error: err.error.errors.email
+        });
+        this.registrationForm.controls.password.setErrors({
+          error: err.error.errors.password
+        });
+        this.registrationForm.controls.password_confirmation.setErrors({
+          error: err.error.errors.password_confirmation
+        });
+        console.log(this);
+      }
+    );
   }
 }
