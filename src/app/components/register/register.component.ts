@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from "src/app/auth.service";
-import { FormBuilder, Validators } from "@angular/forms";
-import { HttpErrorResponse } from "@angular/common/http";
+import { FormBuilder } from "@angular/forms";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-register",
@@ -9,7 +9,11 @@ import { HttpErrorResponse } from "@angular/common/http";
   styleUrls: ["./register.component.css"]
 })
 export class RegisterComponent implements OnInit {
-  constructor(private authService: AuthService, private fb: FormBuilder) {}
+  constructor(
+    private authService: AuthService,
+    private fb: FormBuilder,
+    private router: Router
+  ) {}
   public registrationForm = this.fb.group({
     firstname: [""],
     lastname: [""],
@@ -26,7 +30,9 @@ export class RegisterComponent implements OnInit {
 
     this.authService.registerUser(this.registrationForm.value).subscribe(
       res => {
-        console.log(res), localStorage.setItem("token", res.token);
+        console.log(res);
+        localStorage.setItem("token", res.token);
+        this.router.navigate(["/special"]);
       },
       err => {
         console.log(err);

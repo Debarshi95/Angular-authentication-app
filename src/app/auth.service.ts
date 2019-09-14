@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Observable, pipe } from "rxjs";
-import { map } from "rxjs/operators";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: "root"
@@ -23,5 +22,8 @@ export class AuthService {
     return this.http.post<any>(`${this.url}/login`, user, {
       headers: this.httpOptions
     });
+  }
+  checkToken() {
+    return !!localStorage.getItem("token");
   }
 }
